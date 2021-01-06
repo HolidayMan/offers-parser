@@ -1,6 +1,6 @@
 import os
 
-import telethon
+from telethon import TelegramClient
 import configparser
 
 config = configparser.ConfigParser()
@@ -14,4 +14,13 @@ api_id = config['user_bot']['api_id']
 api_hash = config['user_bot']['api_hash']
 
 client = TelegramClient('anon', api_id, api_hash)
+
+
+async def main():
+    me = await client.get_me()
+    print(me.stringify())
+
+
+with client:
+    client.loop.run_until_complete(main())
 
